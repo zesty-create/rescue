@@ -198,7 +198,7 @@ table.insert(
                     wait()
                 end
                 while mousedown == true do
-                    if object.Parent == nil then
+                    if not object or not object.Parent then
                         break
                     end
                     local t = CFrame.new(front.Position, B.Hit.p)
@@ -256,15 +256,28 @@ table.insert(
                     end
                 end
                 if E == "y" then
-                    if dist ~= 200 then
-                        dist = 200
-                    end
+                    dist = 200
+                end
+                if E == "u" then
+                    dist = 600
                 end
                 if E == "=" then
                     BP.P = BP.P * 1.5
                 end
                 if E == "-" then
                     BP.P = BP.P * 0.5
+                end
+                if E == "f" then
+                    if object and object.Parent then
+                        BP:remove()
+                        object:Destroy()
+                        object = nil
+                        dist = nil
+                        mousedown = false
+                        if objval then
+                            objval.Value = nil
+                        end
+                    end
                 end
             end
             function onEquipped(B)
