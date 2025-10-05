@@ -11,13 +11,15 @@ local Mouse = LocalPlayer:GetMouse();
 
 local UserInputService = game:GetService("UserInputService")
 
-InputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    if UserInputService:GetFocusedTextBox() then
-        return
-    end
+local ToggleFunction = function()
+    print("Функция сработала!") -- сюда твой код функции
+end
 
-    if input.KeyCode == Enum.KeyCode.YOUR_BIND_KEY then
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if gameProcessedEvent then return end
+    if UserInputService:GetFocusedTextBox() then return end  -- игнорируем чат
+    if input.KeyCode == Enum.KeyCode.F then
+        ToggleFunction()  -- срабатывает бинд независимо от тумблера
     end
 end)
 
